@@ -1,0 +1,7 @@
+.episode-name-minicard {
+    border: 2px solid red;
+    border-radius: 10px;
+    text-align: center;
+    padding: 4px;
+    text-overflow: clip;
+}
