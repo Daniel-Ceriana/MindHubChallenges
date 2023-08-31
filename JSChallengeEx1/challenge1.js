@@ -11,7 +11,7 @@ async function initApp() {
 
     // console.log(data)
 
-    compareCharacter([1, 2, 3, 7, 9])
+    compareCharacter(data)
         // sharedEpisodes(data)
 }
 
@@ -19,57 +19,31 @@ initApp()
 
 
 //el primero en el array es al que se van a comparar (recibe ids)
-function compareCharacter(arrayDeCharacters) {
-    const display = DisplayController();
+function compareCharacter(characterArray) {
 
-    //consigue al personaje principal a ser comparado
-    const mainCharacter = data[0].results.filter(character => character.id == arrayDeCharacters[0])
-    const otherCharacters = [];
-    let firstElement = true;
-
-    //crea un array con los personajes a comprarar quitando al principal
-    arrayDeCharacters.forEach(characterID => {
-        if (!firstElement) {
-            otherCharacters.push(data[0].results.filter(character => character.id == characterID));
-        } else {
-            firstElement = false;
-        }
-
-    });
-    console.log(otherCharacters);
+    const comparedArray = [];
+    characterArray[0].results.forEach(mainCharacter => {
+        console.log(mainCharacter.name)
 
 
-    //mostrar personaje principal
-    display.displayMainCharacter(mainCharacter[0])
+        characterArray[0].results.forEach(secondaryCharacter => {
+            console.log(secondaryCharacter.name)
+            secondaryCharacter.episode.forEach(episode => {
 
-    //comparacion y muestra de otros personajes
-    otherCharacters.forEach(characterObject => {
-        console.log(characterObject[0].name);
-        // console.log()
-        const sharedEpisodes = [];
-        characterObject[0].episode.forEach(episode => {
-            mainCharacter[0].episode.forEach(mainEpisode => {
-                if (mainEpisode == episode) {
-                    sharedEpisodes.push(episode)
-                } else {
+                console.log(episode)
+            });
 
-                    // console.log(mainEpisode)
-                }
-            })
-
-
-        });
-        console.log(sharedEpisodes)
-        display.displaySecondaryCharacter(characterObject[0], sharedEpisodes.length)
-        sharedEpisodes.forEach(async(episode) => {
-            display.displayEpisodesTogether(characterObject[0].id, await getEpisodeName(episode));
+            // console.log(character)
         });
 
-        //al final de todo se ejecuta el displayController
+        comparedArray.push({
+            name: mainCharacter.name,
+        })
 
-
-        // display.displayMainCharacter(mainCharacter[0])
     });
+
+
+
 
 
 }
