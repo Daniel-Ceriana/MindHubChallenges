@@ -19,34 +19,57 @@ initApp()
 
 
 //el primero en el array es al que se van a comparar (recibe ids)
-function compareCharacter(characterArray) {
+async function compareCharacter(characterArray) {
 
+    const aux = []
     const comparedArray = [];
-    characterArray[0].results.forEach(mainCharacter => {
-        console.log(mainCharacter.name)
+    await characterArray[0].results.forEach(mainCharacter => {
 
 
         characterArray[0].results.forEach(secondaryCharacter => {
-            console.log(secondaryCharacter.name)
-            secondaryCharacter.episode.forEach(episode => {
+            console.log("Comparando " + mainCharacter.name + " con " + secondaryCharacter.name)
 
-                console.log(episode)
+            if (mainCharacter.name != secondaryCharacter.name) {
+                mainCharacter.episode.forEach(episode => {
+                    comparedArray.push({
+                        character: mainCharacter.name,
+                        otherCharacter: secondaryCharacter.name,
+                        episodes: secondaryCharacter.episode.filter(secondayCharacterEpisode => secondayCharacterEpisode == episode).flat()
+                    })
+
+
+
+                });
+            }
+            // console.log(comparedArray)
+            console.log(comparedArray)
+            aux.push({
+                mainName: mainCharacter.name,
+                secondaryName: secondaryCharacter.name,
+                episodes: comparedArray
             });
-
             // console.log(character)
+            // console.log(aux)
+            comparedArray.map(element => comparedArray.pop());
         });
 
-        comparedArray.push({
-            name: mainCharacter.name,
-        })
+
+
+
 
     });
 
+}
 
+function asd(auxiliar) {
+    const comparedArray = []
 
-
+    auxiliar.forEach(character => {
+        // console.log(character)
+    });
 
 }
+
 
 async function getEpisodeName(urlEpisode) {
     let res;
