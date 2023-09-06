@@ -11,7 +11,7 @@ async function initApp() {
 
     console.log(await compareCharacter(data))
 
-    // sharedEpisodes(data)
+
 }
 
 initApp()
@@ -34,10 +34,7 @@ async function compareCharacter(characterArray) {
                 try {
                     comparedArray.push({
                         otherCharacterName: secondaryCharacter.name,
-                        // -------------------------- Cambio de nombre no funciona-------------------------------
-                        // al final de todo quedan como promesas, se ejecuta en desorden
-                        // episodesShared: aux.flat().map(async urlEpisode => { urlEpisode = await getEpisodeName(urlEpisode) })
-                        episodesShared: aux.flat()
+                        episodesShared: aux.flat().map(async urlEpisode => urlEpisode = await getEpisodeName(urlEpisode))
                     })
                 } catch (error) {
                     console.log(error)
@@ -58,7 +55,6 @@ async function getEpisodeName(urlEpisode) {
         try {
             const res = await fetch(urlEpisode);
             const data = await res.json();
-            console.log(data.name)
             return data.name;
         } catch (error) {
             console.log(error);
