@@ -34,7 +34,8 @@ async function compareCharacter(characterArray) {
                 try {
                     comparedArray.push({
                         otherCharacterName: secondaryCharacter.name,
-                        episodesShared: aux.flat().map(async urlEpisode => urlEpisode = await getEpisodeName(urlEpisode))
+                        episodesShared: aux.flat().map(async(urlEpisode) => urlEpisode = await getEpisodeName(urlEpisode))
+
                     })
                 } catch (error) {
                     console.log(error)
